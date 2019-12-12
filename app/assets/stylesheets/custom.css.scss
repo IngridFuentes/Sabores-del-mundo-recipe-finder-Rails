@@ -1,2 +1,15 @@
+$navbar-default-bg: pink;
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.center{
+    text-align: center;
+}
+
+.footer {
+    margin-top: 45px;
+    padding-top: 5px;
+    border-top: 1px solid #eaeaea;
+    color: #777;
+}

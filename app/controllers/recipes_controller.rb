@@ -1,4 +1,6 @@
 class RecipesController < ApplicationController
+  before_action :set_recipe, only: [:edit, :update, :destroy]
+
   def index
     # if params[:user_id]
     #   @user = User.find_by(id: params[:user_id])
@@ -11,6 +13,7 @@ class RecipesController < ApplicationController
     # @recipes = Recipe.where(creator_id: current_user.id).
     #   limit(PER_PAGE).offset(PER_PAGE * page)
     # end
+    @recipes = Recipe.all
   end
 
   def show
@@ -57,8 +60,6 @@ class RecipesController < ApplicationController
   end
 
   def update
-    @recipe = Recipe.find(params[:id])
-
     @recipe.update(recipe_params)
 
     if @recipe.save
@@ -69,7 +70,6 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
     @recipe.destroy
     flash[:notice] = "Recipe deleted."
     redirect_to recipes_path
@@ -79,5 +79,9 @@ class RecipesController < ApplicationController
 
   def recipe_params
     params.require(:recipe).permit(:name, :instructions, :difficulty_level, :user_id)
+  end
+
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
   end
 end
