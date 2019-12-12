@@ -1,0 +1,13 @@
+<h1 align="center">Welcome to <%= @user.username %>'s profile</h1>
+<div class="row">
+    <div class="col-md-4 col-md-offset-4 center">
+        <%= gravatar_for @user, size: 100 %>
+    </div>
+</div>
+<h2> <%= @user.username %>'s recipes</h2>
+<%= link_to 'Create a recipe' %> 
+<ol>
+    <li>
+<%= render 'recipes/recipe', obj: @user.recipes %>
+    </li>
+</ol>
