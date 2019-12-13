@@ -1,5 +1,7 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:edit, :update, :destroy]
+  before_action :require_user, except: [:index, :show]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def index
     # if params[:user_id]
@@ -35,11 +37,12 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
 
-    @recipe.creator_id = current_user.id if logged_in?
+    # @recipe.user_id = current_user.id if logged_in?
 
-    if @recipe.save
+    if current_user
+      @recipe.save
       flash[:success] = "Added Recipe"
-      redirect_to recipe_path(@recipe)
+      redirect_to user_path(@user)
     else
       render :new
     end
@@ -83,5 +86,12 @@ class RecipesController < ApplicationController
 
   def set_recipe
     @recipe = Recipe.find(params[:id])
+  end
+
+  def require_same_user
+    if current_user != @recipe.user
+      flash[:danger] = " You can only edit or delete your own recipe"
+      redirect_to root_path
+    end
   end
 end

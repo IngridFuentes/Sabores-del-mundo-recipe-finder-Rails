@@ -1,5 +1,4 @@
-
-<%= link_to 'About', about_path %> |
+<%= render "layouts/navigation" %>
 <%= link_to 'Sign Up', signup_path %> |
 <%= link_to 'Log In', login_path %> |
 <%= link_to 'Log in with Google!', '/auth/google_oauth2' %>
@@ -7,5 +6,6 @@
 <h1> Sabores del Mundo</h1> -
     <h2>Your Handy Recipe Finder </h2>
 </div>
-
+<br>
+<h3 align='center'> Recipes</h3>
 <%= render 'recipes/all', obj: @recipes %>

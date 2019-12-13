@@ -1,15 +1,3 @@
 <h1>Create a Recipe</h1>
 
-<%= form_for @recipe do |f| %>
-<p>
-    <%= f.label :name %> 
-    <%= f.text_field :name %> 
-</p>
-<p>
-    <%= f.label :instructions %> 
-    <%= f.text_area :instructions %> 
-</p>
-<p>
-   <%= f.submit %>
-</p>
-<%end%>
+<%= render 'form' %>
