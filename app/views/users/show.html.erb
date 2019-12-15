@@ -6,14 +6,13 @@
     </div>
 </div>
 <h2> <%= @user.username %>'s recipes</h2>
+<%= link_to 'Update your profile', edit_user_path %> |
 <% if logged_in? %>
 <%= link_to 'Create a recipe', new_recipe_path %> |
 <%= link_to 'Log Out', logout_path %> 
 <% end %>
-<ol>
-    <br>
-    <li>
-<%= render 'recipes/recipe', obj: @user.recipes %>
-    </li>
-</ol>
+<br>
+<br>
+<%= render 'recipes/recipe', obj: @user.recipes %> 
+   <br>
 <%= link_to 'Back to all recipes', root_path %>

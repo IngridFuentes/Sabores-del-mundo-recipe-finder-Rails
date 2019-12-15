@@ -1,3 +1,4 @@
+
 class SessionsController < ApplicationController
   def new
     @user = User.new
@@ -18,15 +19,16 @@ class SessionsController < ApplicationController
       #   end
 
       session[:user] = user.id
-      redirect_to root_path
+      redirect_to user_path(user)
     else
-      user = User.find_by(:email => params[:email])
-      if user && user.authenticate(params[:password])
-        session[:user_id] = user.id
+      # raise params.inspect
+      @user = User.find_by(:email => params[:session][:email])
+      if @user && @user.authenticate(params[:session][:password])
+        session[:user_id] = @user.id
         # i am saving the user id on the session
         flash[:success] = "You have successfully logged in"
 
-        redirect_to user_path(user)
+        redirect_to user_path(@user)
       else
         flash.now[:danger] = "There was something wrong with your login information"
         render "sessions/new"

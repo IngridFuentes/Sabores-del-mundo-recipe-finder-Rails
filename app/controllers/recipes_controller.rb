@@ -19,31 +19,35 @@ class RecipesController < ApplicationController
   end
 
   def show
-    if params[:user_id]
-      @user = User.find_by(id: params[:user_id])
+    if current_user
+      @user = current_user
       @recipe = @user.recipes.find_by(id: params[:id])
+      # redirect_to user_path(@user)
       if @recipe.nil?
         redirect_to user_recipes_path(@user), alert: "Recipe not found"
       end
     else
       @recipe = Recipe.find(params[:id])
+      redirect_to recipe_path(@recipe)
     end
   end
 
   def new
     @recipe = Recipe.new
+    # recipe_ingredients = @recipe.ingredients.build(recipe_params)
   end
 
   def create
-    @recipe = Recipe.new(recipe_params)
+    # byebug
+    @recipe = current_user.recipes.new(recipe_params)
 
     # @recipe.user_id = current_user.id if logged_in?
 
-    if current_user
-      @recipe.save
+    if @recipe.save
       flash[:success] = "Added Recipe"
-      redirect_to user_path(@user)
+      redirect_to user_path(current_user)
     else
+      # byebug
       render :new
     end
   end
@@ -81,7 +85,7 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.require(:recipe).permit(:name, :instructions, :difficulty_level, :user_id)
+    params.require(:recipe).permit(:name, :instructions, :difficulty_level, :user_id, ingredients_attributes: [:id, :name])
   end
 
   def set_recipe

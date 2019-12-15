@@ -1,5 +1,9 @@
-<h1 align='center'>Log in</h1>
+<br>
+<div class="top-left">
 <%= link_to('Log in with Google!', '/auth/google_oauth2') %>
+</div>
+<br>
+<h1 align='center'>Log in</h1>
 <%= form_for(:session, :html => {class: "form-horizontal", role: "form"}, url: login_path) do |f| %>
 <br>
       <div class='form-group'>

@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    
   end
 
   def new
@@ -14,12 +15,12 @@ class UsersController < ApplicationController
   end
 
   def create
+    # debugger
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       flash[:success] = "Welcome #{@user.username}"
       redirect_to user_path(@user)
-      # session[:user_id] = user.id
-      # redirect_to user_path(@user)
     else
       render "new"
     end
@@ -31,7 +32,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:success] = " Your account was updated successfully"
-      redirect_to recipes_path
+      redirect_to user_path(@user)
     else
       render "edit"
     end
