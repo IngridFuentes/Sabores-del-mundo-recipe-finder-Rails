@@ -4,33 +4,20 @@ class RecipesController < ApplicationController
   before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def index
-    # if params[:user_id]
-    #   @user = User.find_by(id: params[:user_id])
-    #   if @user.nil?
-    #     redirect_to users_path, alert: "User not found"
-    #   else
-    #     @recipe = @user.recipes
-    #   end
-    # else
-    # @recipes = Recipe.where(creator_id: current_user.id).
-    #   limit(PER_PAGE).offset(PER_PAGE * page)
-    # end
     @recipes = Recipe.all
-    # @user = User.find(params[:id])
   end
 
   def show
-    if current_user
-      @user = current_user
-      @recipe = @user.recipes.find_by(id: params[:id])
-      # redirect_to user_path(@user)
-      if @recipe.nil?
-        redirect_to user_recipes_path(@user), alert: "Recipe not found"
-      end
-    else
-      @recipe = Recipe.find(params[:id])
-      redirect_to recipe_path(@recipe)
-    end
+    # if current_user != nil
+    #   @user = User.find(current_user.id)
+    #   # byebug
+    #   @recipe = @user.recipes.find_by(id: params[:id])
+    #   if @recipe.nil?
+    #     redirect_to user_recipes_path(@user), alert: "Recipe not found"
+    #   end
+    # end
+
+    @recipe = Recipe.find(params[:id])
   end
 
   def new
@@ -71,16 +58,17 @@ class RecipesController < ApplicationController
     @recipe.update(recipe_params)
 
     if @recipe.save
-      redirect_to @recipe
+      redirect_to recipe_path(@recipe)
     else
       render :edit
     end
   end
 
   def destroy
+    user = User.find_by(id: params[:user_id])
     @recipe.destroy
     flash[:notice] = "Recipe deleted."
-    redirect_to recipes_path
+    redirect_to user_path(user)
   end
 
   def easy_recipes

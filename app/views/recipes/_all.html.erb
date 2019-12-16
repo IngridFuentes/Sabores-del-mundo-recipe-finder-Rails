@@ -1,13 +1,11 @@
-
 <% obj.each do |recipe| %>
 <div class='recipe-name'>
-<li><%= link_to recipe.name, recipe_path(recipe) %>
+  <li><%= link_to recipe.name, recipe_path(recipe) %>
 </div>
 <div class='recipe-meta-details'>
-    <small>Created by: <%= recipe.user.username %>,
-   <%= time_ago_in_words(recipe.created_at) %> ago, 
-   last updated: <%= time_ago_in_words(recipe.updated_at) %> ago </small>
- </div>
+  <small>Created by: <%= recipe.user.username %>,
+    <%= time_ago_in_words(recipe.created_at) %> ago,
+    last updated: <%= time_ago_in_words(recipe.updated_at) %> ago </small>
+</div>
 </li>
- <% end %>
- 
+<% end %>

@@ -7,18 +7,8 @@ class SessionsController < ApplicationController
   def create
     if auth_hash = request.env["omniauth.auth"]
       user = User.find_or_create_by_omniauth(auth_hash)
-
-      # if auth
-      #   user_info = request.env["omniauth.auth"]
-
-      #   user = User.find_or_create_by(uid: auth["uid"]) do |user|
-      #     # user.id = user_info["uid"]
-      #     user.username = user_info["info"]["name"]
-      #     user.email = auth["info"]["email"]
-      #     user.password = SecureRandom.hex
-      #   end
-
-      session[:user] = user.id
+      session[:user_id] = user.id
+      flash[:success] = "You have successfully logged in"
       redirect_to user_path(user)
     else
       # raise params.inspect

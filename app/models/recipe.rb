@@ -8,6 +8,6 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :ingredients
 
   validates :name, presence: true, uniqueness: { scope: :user_id }
-  validates :instructions, presence: true, length: { maximum: 300 }
+  validates :instructions, presence: true
   validates :user_id, presence: true
 end
