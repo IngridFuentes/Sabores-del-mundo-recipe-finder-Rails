@@ -68,7 +68,7 @@ class RecipesController < ApplicationController
     user = User.find_by(id: params[:user_id])
     @recipe.destroy
     flash[:notice] = "Recipe deleted."
-    redirect_to user_path(user)
+    redirect_to user_path(current_user)
   end
 
   def easy_recipes
