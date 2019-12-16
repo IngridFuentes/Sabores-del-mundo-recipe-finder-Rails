@@ -1,8 +1,11 @@
 <%= render "layouts/navigation" %>
-<div class='center jumbotron'>
-<h1> Sabores del Mundo</h1> -
-    <h2>Your Handy Recipe Finder </h2>
+<div id="title-header" class='center jumbotron'>
+    <div>
+        <h1 id="title"> Sabores del Mundo</h1> -
+        <h2 id = "subtitle">Your Handy Recipe Finder </h2>
+    </div>
 </div>
 <br>
-<h3 align='center'> Recipes</h3>
+<%= link_to 'Find Easy Recipes Here', easy_recipes_path, class: 'btn btn-primary btn-lg' %>
+<h1 align='center'> Recipes</h1>
 <%= render 'recipes/all', obj: @recipes %>

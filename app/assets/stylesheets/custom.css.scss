@@ -14,3 +14,38 @@ $navbar-default-bg: pink;
     color: #777;
 }
 
+#message{
+    font-size: 3em;
+    color: blue;
+    text-align: center;
+    list-style: none;
+}
+
+#logged-in-options{
+    margin-top:-3em;
+    // display:inline-block;
+}
+ 
+#title-header{
+    border: 1px solid black;
+    background-image: url("soup.jpg");
+    background-size: contain;
+    // background:purple;
+}
+
+#title{
+    font-family: 'Lobster', cursive;
+ color:#B73239;
+ text-shadow: 0px 3px #000000;
+ width:10em;
+ margin:auto;
+}
+
+#subtitle{
+    background:white;
+    color: #B73239;
+    text-shadow: 0px 2px grey;
+    width:14em;
+    margin:auto;
+}
+

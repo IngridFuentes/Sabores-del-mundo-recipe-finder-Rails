@@ -16,6 +16,7 @@ class RecipesController < ApplicationController
     #   limit(PER_PAGE).offset(PER_PAGE * page)
     # end
     @recipes = Recipe.all
+    # @user = User.find(params[:id])
   end
 
   def show
@@ -80,6 +81,10 @@ class RecipesController < ApplicationController
     @recipe.destroy
     flash[:notice] = "Recipe deleted."
     redirect_to recipes_path
+  end
+
+  def easy_recipes
+    Recipe.easy_difficulty_level
   end
 
   private
