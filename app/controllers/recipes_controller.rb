@@ -8,27 +8,18 @@ class RecipesController < ApplicationController
   end
 
   def show
-    # if current_user != nil
-    #   @user = User.find(current_user.id)
-    #   # byebug
-    #   @recipe = @user.recipes.find_by(id: params[:id])
-    #   if @recipe.nil?
-    #     redirect_to user_recipes_path(@user), alert: "Recipe not found"
-    #   end
-    # end
-
     @recipe = Recipe.find(params[:id])
   end
 
   def new
     @recipe = Recipe.new
-    # recipe_ingredients = @recipe.ingredients.build(recipe_params)
+    5.times { @recipe.recipe_ingredients.build }
   end
 
   def create
-    # byebug
-    @recipe = current_user.recipes.new(recipe_params)
-
+   
+    @recipe = current_user.recipes.build(recipe_params)
+  #  byebug
     # @recipe.user_id = current_user.id if logged_in?
 
     if @recipe.save
@@ -55,8 +46,8 @@ class RecipesController < ApplicationController
   end
 
   def update
+    # byebug
     @recipe.update(recipe_params)
-
     if @recipe.save
       redirect_to recipe_path(@recipe)
     else
@@ -78,7 +69,7 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.require(:recipe).permit(:name, :instructions, :difficulty_level, :user_id, ingredients_attributes: [:id, :name])
+    params.require(:recipe).permit(:name, :instructions, :difficulty_level, :user_id, ingredients_attributes: [:id, :name], recipe_ingredients_attributes:[:quantity, :id, :ingredient_id])
   end
 
   def set_recipe

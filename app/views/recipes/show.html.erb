@@ -3,9 +3,8 @@
 <h4 align='center'>Difficulty Level: <%= @recipe.difficulty_level %></h4>
 
 <% if @recipe.user === current_user %>
-   <p className="user-made">You created this recipe! :)</p>
+   <p className="user-made">You created this recipe! </p>
 <%end%>
-
 
 <div class='well col-xs-8 col-xs-offset-2'>
    <ul class='listing'>
@@ -33,26 +32,18 @@
    </ul>
 </div>
 
-
-
-
-
-<div id="ingredients">
-   <fieldset>
+<div id="ingredients">  
       <legend>Ingredients</legend>
-
       <div class="nested_fields">
          <ul>
-            <% @recipe.ingredients.each do |ing|%>
+            <% @recipe.recipe_ingredients.each do |ing|%>
             <li>
-               <%=ing.name%>
+               <%=ing.ingredient.name%>
+               <%=ing.quantity%>
             </li>
             <% end%>
          </ul>
-
-      </div>
-
-   </fieldset>
+      </div>  
 </div>
 
 <div id="instructions">

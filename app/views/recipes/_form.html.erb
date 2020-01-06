@@ -10,15 +10,17 @@
   <legend><%= f.label :difficulty_level %> </legend>
   <%= f.text_field :difficulty_level %>
   </div>
+
 </fieldset>
   <br>
   <fieldset>
         <legend>Ingredients</legend>
-         <%= f.fields_for :ingredients, @recipe.ingredients.build do |ri| %>
+         <%= f.fields_for :recipe_ingredients do |ing| %>
           <div class="nested_fields">
             <div class="field">
               <h4>List of ingredients</h4>
-              <%= ri.text_area :name %>
+              <%= ing.collection_select :ingredient_id, Ingredient.all, :id, :name %>          
+                  <%= ing.text_field :quantity %>                        
             </div>
          </div>
          <% end %>

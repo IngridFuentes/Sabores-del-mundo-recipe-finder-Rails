@@ -12,13 +12,13 @@
         </div>  
   
   <div>
+  
      <ul id="logged-in-options"class="nav navbar-nav navbar-right">
        <% if logged_in? %>
-         <%= link_to 'Log Out', logout_path, method: :delete %> |
-         <%= link_to "Edit your profile", edit_user_path(current_user) %> |
-        <%= link_to "View your profile", user_path(current_user) %> |
-       
-        <% end %>
+            <%= link_to 'Log Out', logout_path, method: :delete %> |
+            <%= link_to "Edit your profile", edit_user_path(current_user) %> |
+            <%= link_to "View your profile", user_path(current_user) %> |    
+      <% end %>
      </ul>
   </div>
 </nav>

@@ -27,9 +27,10 @@ gem 'devise'
 gem 'dotenv-rails'
 gem "omniauth"
 gem 'omniauth-google-oauth2'
-
-
-
+# gem 'simple_form'
+# gem 'paperclip', '~> 6.1'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
+gem 'nested_form_fields'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
